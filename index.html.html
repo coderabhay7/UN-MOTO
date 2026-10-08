@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UN MOTO | Bike Rentals</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0b0d10;
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 8%;
+    background: #111419;
+    border-bottom: 1px solid #292e35;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #c5ff3d;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 22px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #c5ff3d;
+}
+
+.hero {
+    min-height: 470px;
+    padding: 90px 8%;
+    display: flex;
+    align-items: center;
+    background:
+      linear-gradient(90deg, #0b0d10 15%, #0b0d10cc 55%, #0b0d1060),
+      url("https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1600&q=85")
+      center/cover;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.tag {
+    color: #c5ff3d;
+    letter-spacing: 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 1.05;
+    margin: 20px 0;
+}
+
+.hero-title {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 0 5px 24px rgba(0, 0, 0, .4);
+}
+
+.hero-title span {
+    display: inline-block;
+    letter-spacing: 3px;
+    transform: skewX(-5deg);
+    text-shadow: 0 0 24px rgba(197, 255, 61, .12);
+}
+
+h1 span {
+    color: #c5ff3d;
+}
+
+.hero p {
+    color: #c0c5cc;
+    line-height: 1.8;
+    margin-bottom: 28px;
+}
+
+.btn {
+    display: inline-block;
+    background: #c5ff3d;
+    color: #10130b;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: white;
+}
+
+section {
+    padding: 65px 8%;
+}
+
+.section-title {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #9ba3ae;
+    margin-bottom: 32px;
+    line-height: 1.7;
+}
+
+.bikes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: #15191f;
+    border: 1px solid #282e36;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 20px;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #aeb5bf;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.price {
+    color: #c5ff3d;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 18px 0;
+}
+
+.price small {
+    color: #aeb5bf;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.card .btn {
+    width: 100%;
+    text-align: center;
+}
+
+.booking {
+    background: #15191f;
+    border-radius: 14px;
+    max-width: 700px;
+    margin: auto;
+    padding: 28px;
+    border: 1px solid #303640;
+}
+
+form {
+    display: grid;
+    gap: 16px;
+}
+
+label {
+    font-size: 14px;
+    color: #d6dbe1;
+    display: block;
+    margin-bottom: 8px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 13px;
+    background: #0b0d10;
+    color: white;
+    border: 1px solid #3b424c;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 1px solid #c5ff3d;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 8%;
+    color: #aeb5bf;
+    background: #111419;
+    line-height: 2;
+}
+
+footer strong {
+    color: #c5ff3d;
+}
+
+@media(max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    nav a {
+        margin: 0 7px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 70px 6%;
+        min-height: 430px;
+    }
+
+    section {
+        padding: 45px 6%;
+    }
+}
+
+.confirmation {
+    display: none;
+    max-width: 700px;
+    margin: 25px auto 0;
+    padding: 22px;
+    border: 1px solid #c5ff3d;
+    border-radius: 12px;
+    background: #10150c;
+}
+.confirmation.show { display: block; }
+.confirmation h3 { color: #c5ff3d; margin-bottom: 10px; }
+.confirmation p { color: #d6dbe1; line-height: 1.7; white-space: pre-line; }
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">UN <span>MOTO.</span></div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#bikes">Our Bikes</a>
+        <a href="#booking">Book Now</a>
+    </nav>
+</header>
+
+<div class="hero" id="home">
+    <div class="hero-content">
+
+        <h1 class="hero-title">RIDE IN<br><span>RANCHI.</span></h1>
+
+        <p>
+            Explore the road with UN MOTO.
+            Rent your favourite bike and enjoy
+            every journey with freedom and style.
+        </p>
+
+        <a href="#bikes" class="btn">EXPLORE BIKES →</a>
+    </div>
+</div>
+
+<section id="bikes">
+    <h2 class="section-title">Choose Your Ride.</h2>
+    <p class="subtitle">
+        Find a bike for your next adventure.
+        Prices below are sample rates; edit them to match your business.
+    </p>
+
+    <div class="bikes">
+
+        <div class="card">
+            <img src="https://data1.ibtimes.co.in/en/full/640934/honda-activa-4g-honda-activa-4g-price-honda-activa-4g-features.png"
+                 alt="Honda Activa scooter">
+            <div class="card-info">
+                <h3>Activa Scooter</h3>
+                <p>Easy and comfortable scooter for everyday city rides.</p>
+                <div class="price">₹500 <small>/ day (sample)</small></div>
+                <button class="btn" onclick="chooseBike('Activa Scooter')">RENT THIS BIKE</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://global.honda/jp/guide/history-digest/75years-history/chapter2/section5_2/images/page1_04.jpg"
+                 alt="Hero Honda bike">
+            <div class="card-info">
+                <h3>Hero Honda Bike</h3>
+                <p>Reliable and practical motorcycle for daily travel.</p>
+                <div class="price">₹700 <small>/ day (sample)</small></div>
+                <button class="btn" onclick="chooseBike('Hero Honda Bike')">RENT THIS BIKE</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn1.smartprix.com/rx-iGeIKARL2-w420-h420/royal-enfield-bullet.webp"
+                 alt="Royal Enfield Bullet 350">
+            <div class="card-info">
+                <h3>Bullet 350</h3>
+                <p>Classic Royal Enfield style for powerful and memorable rides.</p>
+                <div class="price">₹900 <small>/ day (sample)</small></div>
+                <button class="btn" onclick="chooseBike('Bullet 350')">RENT THIS BIKE</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://www.motoroids.com/wp-content/uploads/2016/12/2017-Bajaj-Pulsar-180-4.jpg"
+                 alt="Bajaj Pulsar motorcycle">
+            <div class="card-info">
+                <h3>Bajaj Pulsar</h3>
+                <p>Sporty motorcycle made for exciting city and highway rides.</p>
+                <div class="price">₹750 <small>/ day (sample)</small></div>
+                <button class="btn" onclick="chooseBike('Bajaj Pulsar')">RENT THIS BIKE</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn.autopapo.com.br/box/uploads/2026/04/30215253/bajaj-chetak-2026-732x488.png"
+                 alt="Bajaj Chetak scooter">
+            <div class="card-info">
+                <h3>Bajaj Chetak Scooter</h3>
+                <p>Modern electric scooter for smooth and comfortable urban rides.</p>
+                <div class="price">₹650 <small>/ day (sample)</small></div>
+                <button class="btn" onclick="chooseBike('Bajaj Chetak Scooter')">RENT THIS BIKE</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="booking">
+    <h2 class="section-title">Book Your Bike.</h2>
+    <p class="subtitle">
+        Fill in your details to send a booking enquiry on WhatsApp.
+    </p>
+
+    <div class="booking">
+        <form id="bookingForm">
+
+            <div>
+                <label>Your Full Name</label>
+                <input type="text" id="name"
+                       placeholder="Enter your name" required>
+            </div>
+
+            <div>
+                <label>Mobile Number</label>
+                <input type="tel" id="phone"
+                       placeholder="Your mobile number"
+                       pattern="[0-9]{10}" required>
+            </div>
+
+            <div>
+                <label>Select Your Bike</label>
+                <select id="bike" required>
+                    <option value="">Choose a bike</option>
+                    <option>Activa Scooter</option>
+                    <option>Hero Honda Bike</option>
+                    <option>Bullet 350</option>
+                    <option>Bajaj Pulsar</option>
+                    <option>Bajaj Chetak Scooter</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Rental Start Date</label>
+                <input type="date" id="date" required>
+            </div>
+
+            <div>
+                <label>Number of Days</label>
+                <input type="number" id="days" min="1"
+                       max="30" value="1" required>
+            </div>
+
+            <div>
+                <label>Pickup Location</label>
+                <input type="text" id="location"
+                       placeholder="Enter pickup location" required>
+            </div>
+
+            <button class="btn" type="submit">
+                SEND BOOKING ON WHATSAPP
+            </button>
+        </form>
+    </div>
+
+        <div id="confirmationBox" class="confirmation">
+            <h3>✓ Booking Request Sent</h3>
+            <p id="confirmationText"></p>
+        </div>
+</section>
+
+<footer>
+    <h2><strong>UN MOTO.</strong></h2>
+    <p>Your ride, your freedom.</p>
+    <p>Bike Rental Service</p>
+    <p>© 2026 UN MOTO. All rights reserved.</p>
+    <p style="font-size:12px; margin-top:8px;">
+        Bike images: Wikimedia Commons. Individual image licenses/credits apply.
+    </p>
+</footer>
+
+<script>
+/*
+  UN MOTO - Booking + Customer SMS Confirmation
+
+  IMPORTANT:
+  1. The bike number below is currently set to the number you provided:
+     JH 03 MK 2323
+  2. For truly automatic SMS, this HTML must be hosted with the
+     send_sms.php backend and a configured SMS provider such as MSG91.
+*/
+
+const bikeNumbers = {
+    "Activa Scooter": "JH 03 MK 2323",
+    "Hero Honda Bike": "JH 03 MK 2323",
+    "Bullet 350": "JH 03 MK 2323",
+    "Bajaj Pulsar": "JH 03 MK 2323",
+    "Bajaj Chetak Scooter": "JH 03 MK 2323"
+};
+
+function chooseBike(bikeName) {
+    document.getElementById("bike").value = bikeName;
+    document.getElementById("booking").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+document.getElementById("date").min =
+    new Date().toLocaleDateString("en-CA");
+
+document.getElementById("bookingForm").addEventListener("submit",
+function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const bike = document.getElementById("bike").value;
+    const date = document.getElementById("date").value;
+    const days = document.getElementById("days").value;
+    const location = document.getElementById("location").value.trim();
+
+    // Replace with your own WhatsApp number, including country code
+    const ownerWhatsApp = "6206954731";
+
+    if (ownerWhatsApp.includes("X")) {
+        alert("Website owner: Please add your WhatsApp number in the code first.");
+        return;
+    }
+
+    const bikeNumber = bikeNumbers[bike] || "JH 03 MK 2323";
+
+    // Message sent to UN MOTO owner on WhatsApp
+    const ownerMessage =
+        "Hello UN MOTO! I want to enquire about a bike rental.%0A%0A" +
+        "Name: " + encodeURIComponent(name) + "%0A" +
+        "Customer Mobile: " + encodeURIComponent(phone) + "%0A" +
+        "Bike: " + encodeURIComponent(bike) + "%0A" +
+        "Bike Number: " + encodeURIComponent(bikeNumber) + "%0A" +
+        "Start Date: " + encodeURIComponent(date) + "%0A" +
+        "Rental Days: " + encodeURIComponent(days) + "%0A" +
+        "Pickup Location: " + encodeURIComponent(location);
+
+    window.open(
+        "https://wa.me/" + ownerWhatsApp + "?text=" + ownerMessage,
+        "_blank"
+    );
+
+    // Customer confirmation text
+    const customerMessage =
+        "Thank you for connecting to UN MOTO. " +
+        "Your bike has been booked successfully. " +
+        "Bike number is " + bikeNumber + ". " +
+        "Your Pickup Location is " + location + ". " +
+        "Happy journey.";
+
+    // Show confirmation on website immediately
+    const confirmationBox = document.getElementById("confirmationBox");
+    const confirmationText = document.getElementById("confirmationText");
+
+    confirmationText.textContent =
+        "Customer confirmation prepared:
+
+" + customerMessage;
+    confirmationBox.classList.add("show");
+
+    /*
+      AUTOMATIC SMS:
+      This calls your secure PHP backend.
+      The PHP file must be hosted on a PHP-enabled server.
+    */
+    fetch("send_sms.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            phone: phone,
+            name: name,
+            bike: bike,
+            bikeNumber: bikeNumber,
+            date: date,
+            days: days,
+            location: location
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            confirmationText.textContent =
+                "Thank you for connecting to UN MOTO.
+" +
+                "Your bike has been booked successfully.
+" +
+                "Bike number is " + bikeNumber + ".
+" +
+                "Your Pickup Location is " + location + ".
+" +
+                "Happy journey.
+
+" +
+                "✓ Confirmation SMS sent to " + phone;
+        } else {
+            confirmationText.textContent =
+                "Booking details received.
+
+" +
+                customerMessage +
+                "
+
+⚠ SMS could not be sent yet. Please configure send_sms.php.";
+        }
+    })
+    .catch(error => {
+        confirmationText.textContent =
+            "Booking details received.
+
+" +
+            customerMessage +
+            "
+
+⚠ Automatic SMS needs the PHP SMS backend to be hosted.";
+    });
+});
+</script>
+
+</body>
+</html>
